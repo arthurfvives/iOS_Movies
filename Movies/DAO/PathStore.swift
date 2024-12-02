@@ -15,4 +15,16 @@ class PathStore {
     init() {
         path = [Route]() // initialiseren van array
     }
+    
+    func getPath() -> [Route] {
+        return path
+    }
+    
+    func clear() {
+        path.removeAll()
+    }
+    
+    func reduceArray(index: Int) {
+        path = Array(path.prefix(index+1))
+    }
 }

@@ -21,14 +21,15 @@ struct MovieListView: View {
                         Text(movie.description).italic()
                     }
                 }
+                
             }.navigationDestination(for: Route.self) { route in
                 switch route {
-                case .actor:
-                    ActorDetailView()
-                case .movie:
-                    MovieDetailView()
-                case .director:
-                    DirectorDetailView()
+                case let .actor(a):
+                    ActorDetailView(selectedActor: a)
+                case let .movie(m):
+                    MovieDetailView(selectedMovie: m)
+                case let .director(d):
+                    DirectorDetailView(selectedDirector: d)
                 }
             }
         }

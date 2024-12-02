@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct ActorDetailView: View {
+    @Environment(MovieDataStore.self) var dataStore
+    var selectedActor: Actor
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("Actor: \(selectedActor.firstName) \(selectedActor.lastName)")
+            Divider()
+            Text("Birthday: \(selectedActor.birthday)")
+            Spacer()
+            Divider()
+            Text("Movie(s)")
+            ForEach(dataStore.getMovies(actor: selectedActor), id: \.self) {movie in
+                NavigationLink(value: Route.movie(movie)) {
+                    Text(movie.title)
+                }.foregroundStyle(.red)
+            }
+            Spacer()
+            Divider()
+            OverviewNavigationPathView()
+        }
+        
     }
-}
-
-#Preview {
-    ActorDetailView()
 }
